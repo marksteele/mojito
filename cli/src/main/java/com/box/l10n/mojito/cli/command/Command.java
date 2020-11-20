@@ -3,6 +3,7 @@ package com.box.l10n.mojito.cli.command;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.google.common.base.Preconditions;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,11 +17,9 @@ public abstract class Command {
     static final String HELP_LONG = "--help";
     static final String HELP_SHORT = "-h";
     static final String HELP_DESCRIPTION = "Show help";
-
+    public List<String> originalArgs;
     @Parameter(names = {HELP_LONG, HELP_SHORT}, help = true, description = HELP_DESCRIPTION)
     private boolean help;
-
-    public List<String> originalArgs;
 
     /**
      * Method to be overridden to implement the business logic of this command
@@ -42,6 +41,10 @@ public abstract class Command {
         } else {
             execute();
         }
+    }
+
+    public boolean shouldShowInCommandList() {
+        return true;
     }
 
     /**
